@@ -1,44 +1,41 @@
 # taller1PPO
 
-## Descripción
+## Project Description
+This project is a C# console application developed for the PPO workshop.
 
-Este proyecto es una aplicación de consola en **C# (.NET)** desarrollada como solución de una tarea de PPO.
+It implements a `Time` class with:
+- Private fields for hour, minute, second, and millisecond
+- Read-only properties
+- Multiple constructors (overloads)
+- Time conversion methods
+- Time addition logic
+- Validation methods for hour, minute, second, and millisecond
+- Custom string formatting in 12-hour format with AM/PM
 
-El programa implementa una clase `Time` que permite:
-
-- Crear horas con diferentes constructores
-- Validar valores de hora, minutos, segundos y milisegundos
-- Obtener el tiempo en:
-  - Milisegundos
-  - Segundos
-  - Minutos
-- Sumar dos objetos `Time`
-- Validar si la suma corresponde a otro día
-- Mostrar la salida en consola con el formato solicitado en el enunciado
+The `Program.cs` file tests different `Time` objects and prints the results in the console.
 
 ---
 
-## Estructura del proyecto
-
-- `Program.cs` → Contiene el método `Main` y las pruebas de ejecución
-- `Time.cs` → Contiene la clase `Time` con atributos, constructores y métodos
-- `taller1PPO.csproj` → Archivo del proyecto C#
-- `taller1PPO.sln` → Archivo de solución para Visual Studio
-
----
-
-## Requisitos
-
-- **.NET SDK 8.0 o superior** (también puede correr en .NET 10 si lo tienes instalado)
-- **Visual Studio 2022** (opcional, para ejecución desde IDE)
+## Files Included
+- `Program.cs` → Main program that tests the `Time` class
+- `Time.cs` → Implementation of the `Time` class
+- `taller1PPO.csproj` → Project file
+- `taller1PPO.sln` → Solution file
+- `ClassDiagram1.cd` → Class diagram for the `Time` class
 
 ---
 
-## Cómo ejecutar el proyecto
+## How to Run the Project
 
-### Opción 1: Desde terminal (recomendada)
+### Option 1: Visual Studio
+1. Open `taller1PPO.sln` in Visual Studio
+2. Build the project
+3. Run with:
+   - `Ctrl + F5` (recommended, keeps console open)
+   - or `F5` (debug mode)
 
-Ubícate en la carpeta del proyecto y ejecuta:
+### Option 2: .NET CLI
+Open a terminal in the project folder and run:
 
 ```bash
 dotnet run
