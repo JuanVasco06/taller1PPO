@@ -1,5 +1,6 @@
 ﻿using System;
 
+// NOTE: All comments are in English as requested.
 public class Time
 {
     // Private fields
@@ -29,16 +30,16 @@ public class Time
     // Constructor 5: hour, minute, second and millisecond
     public Time(int hour, int minute, int second, int millisecond)
     {
-        if (hour < 0 || hour > 23)
+        if (!ValidHour(hour))
             throw new Exception($"The hour: {hour}, is not valid.");
 
-        if (minute < 0 || minute > 59)
+        if (!ValidMinute(minute))
             throw new Exception($"The minute: {minute}, is not valid.");
 
-        if (second < 0 || second > 59)
+        if (!ValidSecond(second))
             throw new Exception($"The second: {second}, is not valid.");
 
-        if (millisecond < 0 || millisecond > 999)
+        if (!ValidMillisecond(millisecond))
             throw new Exception($"The millisecond: {millisecond}, is not valid.");
 
         _hour = hour;
@@ -47,31 +48,25 @@ public class Time
         _millisecond = millisecond;
     }
 
-    // Returns time in the format hh:mm:ss.mmm tt (with 00 for midnight/noon style as required)
-    public override string ToString()
-    {
-        int hour12 = _hour % 12;
-        string meridiem = _hour < 12 ? "AM" : "PM";
-
-        return $"{hour12:00}:{_minute:00}:{_second:00}.{_millisecond:000} {meridiem}";
-    }
-
-    // Returns the total milliseconds since 00:00:00.000
+    // Returns total milliseconds from 00:00:00.000
     public long ToMilliseconds()
     {
-        return (((_hour * 60L) + _minute) * 60L + _second) * 1000L + _millisecond;
+        return ((long)_hour * 60 * 60 * 1000) +
+               ((long)_minute * 60 * 1000) +
+               ((long)_second * 1000) +
+               _millisecond;
     }
 
-    // Returns the total seconds since 00:00:00
+    // Returns total seconds from 00:00:00
     public long ToSeconds()
     {
         return ToMilliseconds() / 1000;
     }
 
-    // Returns the total minutes since 00:00
+    // Returns total minutes from 00:00
     public long ToMinutes()
     {
-        return ToSeconds() / 60;
+        return ToMilliseconds() / (60 * 1000);
     }
 
     // Returns true if the sum of this time and another time reaches the next day
@@ -104,5 +99,38 @@ public class Time
         hour %= 24;
 
         return new Time(hour, minute, second, millisecond);
+    }
+
+    // Validates hour [0..23]
+    public bool ValidHour(int hour)
+    {
+        return hour >= 0 && hour <= 23;
+    }
+
+    // Validates minute [0..59]
+    public bool ValidMinute(int minute)
+    {
+        return minute >= 0 && minute <= 59;
+    }
+
+    // Validates second [0..59]
+    public bool ValidSecond(int second)
+    {
+        return second >= 0 && second <= 59;
+    }
+
+    // Validates millisecond [0..999]
+    public bool ValidMillisecond(int millisecond)
+    {
+        return millisecond >= 0 && millisecond <= 999;
+    }
+
+    // Returns time in assignment-required format (12-hour with 00 for midnight/noon edge style)
+    public override string ToString()
+    {
+        int displayHour = _hour % 12;
+        string suffix = _hour < 12 ? "AM" : "PM";
+
+        return $"{displayHour:00}:{_minute:00}:{_second:00}.{_millisecond:000} {suffix}";
     }
 }
